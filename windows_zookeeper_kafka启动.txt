@@ -1,0 +1,26 @@
+配置：
+https://www.2cto.com/net/201701/588235.html
+另外需要配置:
+server.properties
+listeners=PLAINTEXT://localhost:9092
+
+# Hostname and port the broker will advertise to producers and consumers. If not set, 
+# it uses the value for "listeners" if configured.  Otherwise, it will use the value
+# returned from java.net.InetAddress.getCanonicalHostName().
+advertised.listeners=PLAINTEXT://localhost:9092
+
+在D:\applications\kafka目录下
+1 启动：
+	1. bin\windows\zookeeper-server-start.bat config\zookeeper.properties
+	2. bin\windows\kafka-server-start.bat config\server.properties
+2 创建主题
+	1. bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic kjTest
+3 查看主题
+	1. bin\windows\kafka-topics.bat --list --zookeeper localhost:2181
+4 启动生产者
+	1. bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic kjTest
+5 启动消费者
+	1. bin\windows\kafka-console-consumer.bat --zookeeper localhost:2181 --topic kjTest --from-beginning
+
+@TODO:
+1. 最新版本的consumer??? bootsrap-server?
